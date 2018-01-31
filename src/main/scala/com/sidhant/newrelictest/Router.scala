@@ -7,6 +7,11 @@ import akka.util.Timeout
 import scala.concurrent.duration.DurationInt
 import scala.util.{Failure, Success}
 
+import akka.actor.Props
+
+import com.sidhant.newrelictest.Messages.TestMessage
+import com.sidhant.newrelictest.controllers.TestController
+
 class Router extends ImperativeComplete {
   implicit val timeout = Timeout(5.seconds)
 
@@ -15,7 +20,7 @@ class Router extends ImperativeComplete {
       pathEndOrSingleSlash {
         get {
           imperativelyComplete { ctx =>
-            ctx.complete("done")
+            Boot.system.actorOf(Props(new TestController(ctx))) ! TestMessage
           }
         }
       }
