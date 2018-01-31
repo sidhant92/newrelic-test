@@ -1,0 +1,2 @@
+export NEW_RELIC_LICENSE_KEY=''
+export NEW_RELIC_APP_NAME=''
